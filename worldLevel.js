@@ -89,7 +89,7 @@ class WorldLevel {
     noStroke();
 
     // icy outer glow
-    fill(180, 225, 255, 180);
+    fill(250, 249, 208);
     ellipse(
       this.goal.x + this.goal.w / 2,
       this.goal.y + this.goal.h / 2,
@@ -98,7 +98,7 @@ class WorldLevel {
     );
 
     // inner core
-    fill(120, 200, 255, 220);
+    fill(255, 215, 0);
     ellipse(
       this.goal.x + this.goal.w / 2,
       this.goal.y + this.goal.h / 2,
