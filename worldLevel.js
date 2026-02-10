@@ -33,8 +33,15 @@ class WorldLevel {
     // Theme defaults + override with JSON.
     this.theme = Object.assign(
       { bg: "#F0F0F0", platform: "#C8C8C8", blob: "#1478FF" },
-      levelJson.theme || {},
+      levelJson.theme || {}
     );
+
+    this.goal = {
+      x: levelJson.goal?.x ?? 560,
+      y: levelJson.goal?.y ?? 120,
+      w: levelJson.goal?.w ?? 50,
+      h: levelJson.goal?.h ?? 70,
+    };
 
     // Physics knobs (the blob player will read these).
     this.gravity = levelJson.gravity ?? 0.65;
@@ -75,5 +82,30 @@ class WorldLevel {
     for (const p of this.platforms) {
       p.draw(color(this.theme.platform));
     }
+    this.drawGoal();
+  }
+  drawGoal() {
+    push();
+    noStroke();
+
+    // icy outer glow
+    fill(180, 225, 255, 180);
+    ellipse(
+      this.goal.x + this.goal.w / 2,
+      this.goal.y + this.goal.h / 2,
+      this.goal.w * 1.2,
+      this.goal.h * 1.2
+    );
+
+    // inner core
+    fill(120, 200, 255, 220);
+    ellipse(
+      this.goal.x + this.goal.w / 2,
+      this.goal.y + this.goal.h / 2,
+      this.goal.w,
+      this.goal.h
+    );
+
+    pop();
   }
 }

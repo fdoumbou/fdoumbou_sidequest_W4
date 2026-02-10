@@ -42,9 +42,23 @@ function setup() {
 function draw() {
   // 1) Draw the world (background + platforms)
   world.drawWorld();
+  world.drawGoal();
 
   // 2) Update and draw the player on top of the world
   player.update(world.platforms);
+  // Win condition: touch the goal (activator)
+  const playerBox = {
+    x: player.x - player.r,
+    y: player.y - player.r,
+    w: player.r * 2,
+    h: player.r * 2,
+  };
+
+  if (overlapAABB(playerBox, world.goal)) {
+    const next = levelIndex + 1;
+    if (next < data.levels.length) loadLevel(next);
+    else console.log("All levels complete!");
+  }
   player.draw(world.theme.blob);
 
   // 3) HUD
